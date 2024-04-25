@@ -34,5 +34,8 @@
 # Debug output
 Enigma.dSYM/
 
-# Ignore the output
+# Ignore the compiled output
 Enigma
+
+# Ignore the generated program output file
+encrypted.txt

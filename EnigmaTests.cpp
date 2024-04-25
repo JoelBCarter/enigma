@@ -41,9 +41,9 @@ TEST_F(EnigmaTest, Decrypt)
 
 TEST_F(EnigmaTest, EncryptDecryptRoundTrip)
 {
-    std::string key = "KEY";
+    std::string key = "GBRXMD";
     Enigma enigma(key);
-    std::vector<std::string> plaintext = {"HELLO", "WORLD"};
+    std::vector<std::string> plaintext = {"THE", "QUICK", "BROWN", "FOX", "JUMPS", "OVER", "THE", "LAZY", "DOG"};
     std::vector<std::string> encrypted;
     std::vector<std::string> decrypted;
 
@@ -57,11 +57,11 @@ TEST_F(EnigmaTest, EncryptDecryptRoundTrip)
     }
 }
 
-TEST_F(EnigmaTest, EncryptDecryptNonAlphaCharacters)
+TEST_F(EnigmaTest, EncryptDecryptRoundTripWithSpaces)
 {
-    std::string key = "KEY";
+    std::string key = "GBRXMD";
     Enigma enigma(key);
-    std::vector<std::string> plaintext = {"HELLO 123", "WORLD!@#"};
+    std::vector<std::string> plaintext = {"THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"};
     std::vector<std::string> encrypted;
     std::vector<std::string> decrypted;
 

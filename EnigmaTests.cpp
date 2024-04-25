@@ -1,18 +1,12 @@
 #include "gtest/gtest.h"
 #include "Enigma.h"
 
-class EnigmaTest : public ::testing::Test {
-protected:
-    void SetUp() override {
-        // Setup code here, if necessary
-    }
-
-    void TearDown() override {
-        // Cleanup code here, if necessary
-    }
+class EnigmaTest : public ::testing::Test
+{
 };
 
-TEST_F(EnigmaTest, EncryptDecryptConsistency) {
+TEST_F(EnigmaTest, EncryptDecryptConsistency)
+{
     std::string key = "KEY";
     Enigma enigma(key);
     std::vector<std::string> plaintext = {"HELLO", "WORLD"};
@@ -23,12 +17,14 @@ TEST_F(EnigmaTest, EncryptDecryptConsistency) {
     enigma.Decrypt(encrypted, decrypted);
 
     ASSERT_EQ(plaintext.size(), decrypted.size());
-    for (size_t i = 0; i < plaintext.size(); ++i) {
+    for (size_t i = 0; i < plaintext.size(); ++i)
+    {
         EXPECT_EQ(plaintext[i], decrypted[i]);
     }
 }
 
-TEST_F(EnigmaTest, EncryptDecryptNonAlphaCharacters) {
+TEST_F(EnigmaTest, EncryptDecryptNonAlphaCharacters)
+{
     std::string key = "KEY";
     Enigma enigma(key);
     std::vector<std::string> plaintext = {"HELLO 123", "WORLD!@#"};
@@ -39,12 +35,14 @@ TEST_F(EnigmaTest, EncryptDecryptNonAlphaCharacters) {
     enigma.Decrypt(encrypted, decrypted);
 
     ASSERT_EQ(plaintext.size(), decrypted.size());
-    for (size_t i = 0; i < plaintext.size(); ++i) {
+    for (size_t i = 0; i < plaintext.size(); ++i)
+    {
         EXPECT_EQ(plaintext[i], decrypted[i]);
     }
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }

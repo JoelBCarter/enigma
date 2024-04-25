@@ -37,14 +37,17 @@ void Enigma::Decrypt(const std::vector<std::string> &encryptedText, std::vector<
 }
 
 char Enigma::shiftChar(char c, int shift) {
-    if (!isalpha(c)) {
-        return c;  // Non-alphabetic characters are not shifted.
+    // Check if the character is an uppercase letter
+    if (c < 'A' || c > 'Z') {
+        return c;  // Return the character unchanged if it is not a capital letter
     }
 
-    char base = isupper(c) ? 'A' : 'a';
-    int alphaIndex = (c - base + shift) % 26;  // Calculate index in the alphabet with the shift
-    if (alphaIndex < 0) {
-        alphaIndex += 26;  // Ensure the index is positive
+    // Shift the character within the range of 'A' to 'Z'
+    int alphaIndex = c - 'A' + 1;          // Convert character to a 0-25 index
+    int shiftedIndex = (alphaIndex + shift) % 26;  // Apply the shift and wrap around using modulo 26
+    if (shiftedIndex < 0) {
+        shiftedIndex += 26;  // Adjust if the result is negative (for negative shifts)
     }
-    return base + alphaIndex;  // Convert back to the ASCII character
+
+    return 'A' + shiftedIndex;  // Convert back to the ASCII character
 }

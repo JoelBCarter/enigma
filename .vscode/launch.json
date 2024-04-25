@@ -1,22 +1,14 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Enigma",
-            "type": "cppdbg",
+            "name": "Debug (lldb)",
+            "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/Enigma",
             "args": [],
-            "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "lldb",
-            // "preLaunchTask": "build", // Ensure this matches the label of your build task in tasks.json
-            "miDebuggerPath": "/usr/bin/lldb" // Make sure this path is correct for LLDB on your system
+            "preLaunchTask": "build"
         }
     ]
 }

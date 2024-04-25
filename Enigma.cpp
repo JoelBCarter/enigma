@@ -11,7 +11,7 @@ void Enigma::Encrypt(const std::vector<std::string> &plaintext, std::vector<std:
         std::string encryptedLine;
         for (char c : line)
         {
-            // Convert the key character to a key number from 1 - 26
+            // Convert the key character to a number (1 - 26) to add to the ASCII value of the text character
             int shift = key[keyIndex] - 'A' + 1;
             // Add the key number to the ASCII value of the text character to get the encrypted character
             encryptedLine += shiftChar(c, shift);
@@ -31,8 +31,11 @@ void Enigma::Decrypt(const std::vector<std::string> &encryptedText, std::vector<
         std::string decryptedLine;
         for (char c : line)
         {
+            // Convert the key character to a number (1 - 26) to subtract from the ASCII value of the text character
             int shift = -(key[keyIndex] - 'A') - 1;
+            // Subtract the key number from the ASCII value of the text character to get the decrypted character
             decryptedLine += shiftChar(c, shift);
+            // Move to the next key character, wrapping around if past end of key
             keyIndex = (keyIndex + 1) % key.length();
         }
         plaintext.push_back(decryptedLine);
@@ -41,10 +44,11 @@ void Enigma::Decrypt(const std::vector<std::string> &encryptedText, std::vector<
 
 char Enigma::shiftChar(char c, int shift)
 {
-    // Check if the character is an uppercase letter
+    // If the character is not an uppercase letter
     if (c < 'A' || c > 'Z')
     {
-        return c; // Return the character unchanged if it is not a capital letter
+        // Return the character unchanged
+        return c;
     }
 
     // Shift the character within the range of 'A' to 'Z'

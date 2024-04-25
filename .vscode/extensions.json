@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "ms-vscode.cpptools", // C/C++ Extension by Microsoft for IntelliSense and debugging
+        "vadimcn.vscode-lldb", // CodeLLDB for LLDB debugging support
+        "jeff-hykin.better-cpp-syntax", // (Optional) Improved C++ syntax highlighting
+        "ms-vscode.makefile-tools", // (Optional) Makefile support
+        "twxs.cmake", // (Optional) CMake support and build system
+        "austin.code-gnu-global", // (Optional) GNU Global support for tagging
+        "xaver.clang-format", // (Optional) Clang-format for code formatting
+        "streetsidesoftware.code-spell-checker" // (Optional) Spell checker for code
+    ]
+}

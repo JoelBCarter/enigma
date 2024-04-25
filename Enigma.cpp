@@ -11,8 +11,11 @@ void Enigma::Encrypt(const std::vector<std::string> &plaintext, std::vector<std:
         std::string encryptedLine;
         for (char c : line)
         {
+            // Convert the key character to a key number from 1 - 26
             int shift = key[keyIndex] - 'A' + 1;
+            // Add the key number to the ASCII value of the text character to get the encrypted character
             encryptedLine += shiftChar(c, shift);
+            // Move to the next key character, wrapping around if past end of key
             keyIndex = (keyIndex + 1) % key.length();
         }
         encryptedText.push_back(encryptedLine);

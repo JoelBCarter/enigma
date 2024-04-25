@@ -36,6 +36,7 @@ Enigma.dSYM/
 
 # Ignore the compiled output
 Enigma
+EnigmaTests
 
 # Ignore the generated program output file
 encrypted.txt

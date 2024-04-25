@@ -1,13 +1,17 @@
 #include "Enigma.h"
 
-Enigma::Enigma(const std::string& key) : key(key), keyIndex(0) {}
+Enigma::Enigma(const std::string &key) : key(key), keyIndex(0) {}
 
-void Enigma::Encrypt(const std::vector<std::string>& plaintext, std::vector<std::string>& encryptedText) {
+void Enigma::Encrypt(const std::vector<std::string> &plaintext, std::vector<std::string> &encryptedText)
+{
     encryptedText.clear();
-    for (const auto& line : plaintext) {
+    keyIndex = 0; // Reset key index at the start
+    for (const auto &line : plaintext)
+    {
         std::string encryptedLine;
-        for (char c : line) {
-            int shift = key[keyIndex] - 'A'; // assuming key is all uppercase
+        for (char c : line)
+        {
+            int shift = key[keyIndex] - 'A';
             encryptedLine += shiftChar(c, shift);
             keyIndex = (keyIndex + 1) % key.length();
         }
@@ -15,31 +19,32 @@ void Enigma::Encrypt(const std::vector<std::string>& plaintext, std::vector<std:
     }
 }
 
-void Enigma::Decrypt(const std::vector<std::string>& encryptedText, std::vector<std::string>& plaintext) {
+void Enigma::Decrypt(const std::vector<std::string> &encryptedText, std::vector<std::string> &plaintext)
+{
     plaintext.clear();
-    for (const auto& line : encryptedText) {
+    keyIndex = 0; // Reset key index at the start
+    for (const auto &line : encryptedText)
+    {
         std::string decryptedLine;
-        for (char c : line) {
-            int shift = -(key[keyIndex] - 'A'); // Make the shift negative for decryption
+        for (char c : line)
+        {
+            int shift = -(key[keyIndex] - 'A');
             decryptedLine += shiftChar(c, shift);
-            keyIndex = (keyIndex + 1) % key.length(); // Increment key index and wrap around
+            keyIndex = (keyIndex + 1) % key.length();
         }
         plaintext.push_back(decryptedLine);
     }
 }
 
 char Enigma::shiftChar(char c, int shift) {
-    // Check if the character is alphabetic; if not, return it unchanged
     if (!isalpha(c)) {
-        return c;
+        return c;  // Non-alphabetic characters are not shifted.
     }
 
-    // Determine the range: 'A' to 'Z' or 'a' to 'z'
-    char offset = isupper(c) ? 'A' : 'a';
-    // Shift within the bounds of 0-25 (modulus 26)
-    int shifted = static_cast<int>(c - offset + shift) % 26;
-    if (shifted < 0) {
-        shifted += 26; // Ensure positive result after modulo operation
+    char base = isupper(c) ? 'A' : 'a';
+    int alphaIndex = (c - base + shift) % 26;  // Calculate index in the alphabet with the shift
+    if (alphaIndex < 0) {
+        alphaIndex += 26;  // Ensure the index is positive
     }
-    return static_cast<char>(shifted + offset);
+    return base + alphaIndex;  // Convert back to the ASCII character
 }

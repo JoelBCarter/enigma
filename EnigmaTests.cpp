@@ -22,6 +22,23 @@ TEST_F(EnigmaTest, Encrypt)
     }
 }
 
+TEST_F(EnigmaTest, Decrypt)
+{
+    std::string key = "GBRXMD";
+    Enigma enigma(key);
+    std::vector<std::string> encrypted = {"AJW", "OHMJM", "TPBAU", "HGV", "WYTRK", "MIIY", "VZC", "YEGA", "VMT"};
+    std::vector<std::string> plaintext = {"THE", "QUICK", "BROWN", "FOX", "JUMPS", "OVER", "THE", "LAZY", "DOG"};
+    std::vector<std::string> decrypted;
+
+    enigma.Decrypt(encrypted, decrypted);
+
+    ASSERT_EQ(decrypted.size(), encrypted.size()); // Ensure the sizes are the same
+    for (size_t i = 0; i < plaintext.size(); ++i)
+    {
+        EXPECT_EQ(decrypted[i], plaintext[i]); // Compare each decrypted string with the plaintext string
+    }
+}
+
 TEST_F(EnigmaTest, EncryptDecryptRoundTrip)
 {
     std::string key = "KEY";

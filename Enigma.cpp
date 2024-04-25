@@ -11,7 +11,7 @@ void Enigma::Encrypt(const std::vector<std::string> &plaintext, std::vector<std:
         std::string encryptedLine;
         for (char c : line)
         {
-            int shift = key[keyIndex] - 'A';
+            int shift = key[keyIndex] - 'A' + 1;
             encryptedLine += shiftChar(c, shift);
             keyIndex = (keyIndex + 1) % key.length();
         }
@@ -28,7 +28,7 @@ void Enigma::Decrypt(const std::vector<std::string> &encryptedText, std::vector<
         std::string decryptedLine;
         for (char c : line)
         {
-            int shift = -(key[keyIndex] - 'A');
+            int shift = -(key[keyIndex] - 'A') - 1;
             decryptedLine += shiftChar(c, shift);
             keyIndex = (keyIndex + 1) % key.length();
         }
@@ -36,18 +36,21 @@ void Enigma::Decrypt(const std::vector<std::string> &encryptedText, std::vector<
     }
 }
 
-char Enigma::shiftChar(char c, int shift) {
+char Enigma::shiftChar(char c, int shift)
+{
     // Check if the character is an uppercase letter
-    if (c < 'A' || c > 'Z') {
-        return c;  // Return the character unchanged if it is not a capital letter
+    if (c < 'A' || c > 'Z')
+    {
+        return c; // Return the character unchanged if it is not a capital letter
     }
 
     // Shift the character within the range of 'A' to 'Z'
-    int alphaIndex = c - 'A' + 1;          // Convert character to a 0-25 index
-    int shiftedIndex = (alphaIndex + shift) % 26;  // Apply the shift and wrap around using modulo 26
-    if (shiftedIndex < 0) {
-        shiftedIndex += 26;  // Adjust if the result is negative (for negative shifts)
+    int alphaIndex = c - 'A';                     // Convert character to a 0-25 index
+    int shiftedIndex = (alphaIndex + shift) % 26; // Apply the shift and wrap around using modulo 26
+    if (shiftedIndex < 0)
+    {
+        shiftedIndex += 26; // Adjust if the result is negative (for negative shifts)
     }
 
-    return 'A' + shiftedIndex;  // Convert back to the ASCII character
+    return 'A' + shiftedIndex; // Convert back to the ASCII character
 }
